@@ -59,6 +59,6 @@ const options = {
   isUndefined: _.noop,
 }
 ```
-Object property values can be cleaned up depending on type. If you want to remove null values simply send `{ isNull: _.noop }` and they will be removed. Or if you want to keep function properties `{ isFunction: _.identity }`. Take a look at /src/clean.js for our default handling of strings and arrays.
+Object property values can be cleaned up depending on type. If you want to remove null values simply send `{ isNull: _.noop }` and they will be removed. Or if you want to keep function properties `{ isFunction: _.identity }`. Take a look at /src/clean.js for our default handling of strings and arrays. Returning **undefined** will result in the property being **removed**. Returning anything else will set the new value.
 
-A function will be passed the default options and will need return a function that decides how to cleanup the object. See `mungeValue()` within /src/munge.js for reference. It's there if you need it.
+If you need more control and pass a function it will be passed the default options and will need return a function that decides how to cleanup the object. See `mungeValue()` within /src/munge.js for reference. Not sure why you'd need it, but it's there for you as an option.
