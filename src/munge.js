@@ -6,7 +6,7 @@ import {
 
 import { cleanArray, cleanObject, cleanString } from './clean'
 
-const mungeWithDefaults = {
+export const mungeWithDefaults = {
   isArray: cleanArray,
   isBoolean: identity,
   isDate: identity,
