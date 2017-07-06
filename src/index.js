@@ -1,12 +1,18 @@
 import { isFunction } from 'lodash'
 
-import mungeValue, { mungeWithDefaults } from './munge'
+import { fieldTypeCleaners, buildGetValue, getValue } from './munge'
 
 function getMungeFunc(mungeOption) {
-  if (isFunction(mungeOption)) return mungeOption(mungeWithDefaults)
-  return mungeValue(mungeOption)
+  if (isFunction(mungeOption)) return mungeOption(fieldTypeCleaners)
+  return buildGetValue(mungeOption)
 }
-export default function clean(node, mungeOption) {
-  const mungeWith = getMungeFunc(mungeOption)
-  return mungeWith(node, mungeWith)
+
+export {
+  fieldTypeCleaners, buildGetValue, getValue,
 }
+export function getCleaner(mungeOption) {
+  const cleaner = getMungeFunc(mungeOption)
+  return node => cleaner(node, cleaner)
+}
+
+export default getCleaner()
