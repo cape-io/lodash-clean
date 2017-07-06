@@ -6,7 +6,7 @@ import {
 
 import { cleanArray, cleanObject, cleanString } from './clean'
 
-export const mungeWithDefaults = {
+export const fieldTypeCleaners = {
   isArray: cleanArray,
   isBoolean: identity,
   isDate: identity,
@@ -17,9 +17,9 @@ export const mungeWithDefaults = {
   isUndefined: noop,
 }
 
-export default function mungeValue(mungeWithOptions = {}) {
-  const mungeWith = defaults(mungeWithOptions, mungeWithDefaults)
-  function getValue(node, clean) {
+export function buildGetValue(mungeWithOptions = {}) {
+  const mungeWith = defaults(mungeWithOptions, fieldTypeCleaners)
+  return function getValue(node, clean) {
     if (isUndefined(node)) return mungeWith.isUndefined(node)
     if (isFunction(node)) return mungeWith.isFunction(node)
     if (isBoolean(node)) return mungeWith.isBoolean(node)
@@ -30,5 +30,5 @@ export default function mungeValue(mungeWithOptions = {}) {
     if (!isObject(node)) return node
     return mungeWith.isPlainObject(node, clean)
   }
-  return getValue
 }
+export const getValue = buildGetValue()
