@@ -1,6 +1,6 @@
 import {
   defaults, identity,
-  isArray, isBoolean, isDate, isFunction, isNull, isObject, isString, isUndefined,
+  isArray, isBoolean, isDate, isFunction, isNull, isPlainObject, isString, isUndefined,
   noop,
 } from 'lodash'
 
@@ -19,7 +19,7 @@ export const fieldTypeCleaners = {
 
 export function buildGetValue(mungeWithOptions = {}) {
   const mungeWith = defaults(mungeWithOptions, fieldTypeCleaners)
-  return function getValue(node, clean) {
+  return function getVal(node, clean) {
     if (isUndefined(node)) return mungeWith.isUndefined(node)
     if (isFunction(node)) return mungeWith.isFunction(node)
     if (isBoolean(node)) return mungeWith.isBoolean(node)
@@ -27,8 +27,8 @@ export function buildGetValue(mungeWithOptions = {}) {
     if (isString(node)) return mungeWith.isString(node)
     if (isDate(node)) return mungeWith.isDate(node)
     if (isArray(node)) return mungeWith.isArray(node, clean)
-    if (!isObject(node)) return node
-    return mungeWith.isPlainObject(node, clean)
+    if (isPlainObject(node)) return mungeWith.isPlainObject(node, clean)
+    return node
   }
 }
 export const getValue = buildGetValue()

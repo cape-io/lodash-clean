@@ -2,7 +2,7 @@
 
 Remove object properties that are undefined, functions, empty arrays, or empty strings.
 Sometimes the API response is filled with tons properties that are empty strings and you want them gone.
-Think of this as a mild form of `_.compact` for objects. Returns a new object.
+Think of this as a mild form of `_.compact` for objects. Returns a new object or `undefined`.
 
 ## Install
 
@@ -16,6 +16,7 @@ $ npm i --save lodash-clean
 
 ```javascript
 import clean from 'lodash-clean'
+
 const before = {
   one: ' ',
   two: [ '', '', '', [ '' ] ],
@@ -45,9 +46,11 @@ const after = clean(before)
 
 ### Options
 
-You can pass an object or function as a second argument.
+You can customize the processing.
 
 ```javascript
+import { buildCleaner } from 'lodash-clean'
+
 const options = {
   isArray: cleanArray,
   isBoolean: _.identity,
@@ -58,7 +61,13 @@ const options = {
   isString: cleanString,
   isUndefined: _.noop,
 }
+const clean = buildCleaner(options)
+
+// ...
+
+const after = clean(before)
 ```
+
 Object property values can be cleaned up depending on type. If you want to remove null values simply send `{ isNull: _.noop }` and they will be removed. Or if you want to keep function properties `{ isFunction: _.identity }`. Take a look at /src/clean.js for our default handling of strings and arrays. Returning **undefined** will result in the property being **removed**. Returning anything else will set the new value.
 
 If you need more control and pass a function it will be passed the default options and will need return a function that decides how to cleanup the object. See `mungeValue()` within /src/munge.js for reference. Not sure why you'd need it, but it's there for you as an option.
