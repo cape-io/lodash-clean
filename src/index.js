@@ -1,4 +1,4 @@
-import { isFunction, partialRight } from 'lodash'
+import { isFunction } from 'lodash/fp'
 
 import { fieldTypeCleaners, buildGetValue, getValue } from './munge'
 
@@ -14,5 +14,6 @@ export function buildCleaner(mungeOption) {
   const cleaner = getMungeFunc(mungeOption)
   return node => cleaner(node, cleaner)
 }
+export const cleaner = obj => getValue(obj, getValue)
 
-export default partialRight(getValue, getValue)
+export default cleaner

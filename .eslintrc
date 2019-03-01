@@ -1,25 +1,14 @@
-{
-  "extends": [
-    "airbnb-base",
-    "plugin:import/errors",
-    "plugin:import/warnings"
-  ],
-  "env": {
-    "browser": false,
-  },
-  "rules": {
-    "comma-dangle": [2, "always-multiline"],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.spec.js", "**/mock.js"]}],
-    "id-length": [2, {
-      "min": 3,
-      "max": 30,
-      "properties": "never",
-      "exceptions": ["t", "id", "db", "B2", "_"]
-    }],
-    "import/no-named-as-default": 0,
-    "no-console": 1,
-    "no-alert": 1,
-    "no-trailing-spaces": 2,
-    "semi": [ 2, "never" ]
-  }
-}
+---
+env:
+  browser: false
+extends:
+  - eslint:recommended
+  - airbnb-base
+  - plugin:import/errors
+  - plugin:import/warnings
+  - plugin:lodash-fp/recommended
+plugins:
+  - import
+  - lodash-fp
+rules:
+  semi: [2, never]

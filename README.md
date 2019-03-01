@@ -1,4 +1,4 @@
-# lodash-clean v2.0.1
+# lodash-clean
 
 Remove object properties that are undefined, functions, empty arrays, or empty strings.
 Sometimes the API response is filled with tons properties that are empty strings and you want them gone.
@@ -30,6 +30,7 @@ const before = {
   height: 0,
   finish: false,
   start: true,
+  'nathan.drake@example.com': 'Issue #1',
 }
 const after = clean(before)
 // {
@@ -41,6 +42,7 @@ const after = clean(before)
 //   height: 0,
 //   finish: false,
 //   start: true,
+//   'nathan.drake@example.com': 'Issue #1',
 // }
 ```
 

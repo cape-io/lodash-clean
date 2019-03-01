@@ -1,10 +1,19 @@
 import {
-  defaults, identity,
-  isArray, isBoolean, isDate, isFunction, isNull, isPlainObject, isString, isUndefined,
-  noop,
-} from 'lodash'
+  compact, defaults, flow, isArray, isBoolean, isDate, identity, isEmpty, isFunction,
+  isNull, isPlainObject, isString, isUndefined, noop, overEvery, overSome,
+  pickBy, reject, trim,
+} from 'lodash/fp'
 
 import { cleanArray, cleanObject, cleanString } from './clean'
+
+export const isEmptyString = overEvery([isString, flow(trim, isEmpty)])
+export const isEmptyObject = overEvery([isPlainObject, flow(pickBy(identity), isEmpty)])
+export const isEmptyArr = overEvery([isArray, flow(compact, isEmpty)])
+export const rejectEmpty = reject(overSome([isEmptyString, isEmptyObject, isEmptyArr]))
+// Only does one level of recursion. :-(
+export const isEmptyArray = overEvery([
+  isArray, flow(compact, rejectEmpty, isEmpty),
+])
 
 export const fieldTypeCleaners = {
   isArray: cleanArray,
@@ -18,7 +27,7 @@ export const fieldTypeCleaners = {
 }
 
 export function buildGetValue(mungeWithOptions = {}) {
-  const mungeWith = defaults(mungeWithOptions, fieldTypeCleaners)
+  const mungeWith = defaults(fieldTypeCleaners, mungeWithOptions)
   return function getVal(node, clean) {
     if (isUndefined(node)) return mungeWith.isUndefined(node)
     if (isFunction(node)) return mungeWith.isFunction(node)

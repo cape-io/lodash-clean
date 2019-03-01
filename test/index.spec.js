@@ -1,6 +1,7 @@
-import test from 'tape'
-import _ from 'lodash'
+import _ from 'lodash/fp'
 import clean, { buildCleaner } from '../src'
+
+/* globals describe test expect */
 
 const before = {
   one: ' ',
@@ -16,6 +17,7 @@ const before = {
   height: 0,
   finish: false,
   start: true,
+  'nathan.drake@example.com': 'Issue #1',
 }
 const after = {
   three: 'four',
@@ -27,15 +29,24 @@ const after = {
   height: 0,
   finish: false,
   start: true,
+  'nathan.drake@example.com': 'Issue #1',
 }
 
-test('clean', (t) => {
-  t.equal(clean(' a '), 'a', 'simple string trim.')
-  t.deepEqual(clean(before), after, 'single object')
-  t.deepEqual(clean([before, before]), [after, after], 'array of objects')
-  t.equal(clean(' foo '), 'foo', 'string')
-  t.end()
+describe('clean', () => {
+  test('trim whitespace around string', () => {
+    expect(clean(' a ')).toBe('a')
+  })
+  test('compact array', () => {
+    expect(clean(['', '', ''])).toEqual(undefined)
+  })
+  test('clean up single object', () => {
+    expect(clean(before)).toEqual(after)
+  })
+  test('clean up array of objects', () => {
+    expect(clean([before, before])).toEqual([after, after])
+  })
 })
+
 const after2 = {
   three: 'four',
   descriptions: ['SAMPLE SET'],
@@ -45,16 +56,19 @@ const after2 = {
   height: 0,
   finish: false,
   start: true,
+  'nathan.drake@example.com': 'Issue #1',
 }
 
-test('buildCleaner', (t) => {
+describe('buildCleaner', () => {
   const cleaner = buildCleaner({ isNull: _.noop })
-  t.equal(cleaner(' a '), 'a', 'simple string trim.')
-  t.equal(cleaner(null), undefined, 'null gone')
-  t.equal(cleaner({ foo: null }), undefined, 'null prop only returns undefined')
-  t.deepEqual(cleaner({ foo: null, bar: 1 }), { bar: 1 }, 'small obj')
-  const res = cleaner(before)
-  t.deepEqual(res, after2, 'single object')
-  t.deepEqual(cleaner([before, before]), [after2, after2], 'array of objects')
-  t.end()
+  test('trim whitespace around string', () => {
+    expect(cleaner(' a ')).toBe('a')
+  })
+  test('custom null handler removes null values', () => {
+    expect(cleaner(null)).toBe(undefined)
+    expect(cleaner({ kai: null })).toBe(undefined)
+    expect(cleaner({ foo: null, bar: 1 })).toEqual({ bar: 1 })
+    expect(cleaner(before)).toEqual(after2)
+    expect(cleaner([before, before])).toEqual([after2, after2])
+  })
 })
