@@ -76,4 +76,5 @@ If you need more control or want to process additional types pass a function. Tt
 
 ## Changes
 
+* **2.1** Allow keys to have dots. See issue #1.
 * **2.0** Will now remove empty objects. Internal rewrite and code cleanup.
