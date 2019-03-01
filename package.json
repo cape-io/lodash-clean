@@ -1,6 +1,6 @@
 {
   "name": "lodash-clean",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Remove object keys that have empty values.",
   "main": "lib/index.js",
   "author": "Kai Curry <kai@cape.io> (http://www.cape.io/)",
