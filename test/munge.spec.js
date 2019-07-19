@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from 'lodash/fp'
 import { buildGetValue, getValue } from '../src/munge'
 
 /* globals describe test expect */

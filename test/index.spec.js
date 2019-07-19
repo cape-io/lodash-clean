@@ -18,6 +18,7 @@ const before = {
   finish: false,
   start: true,
   'nathan.drake@example.com': 'Issue #1',
+  'foo.bar': '',
 }
 const after = {
   three: 'four',

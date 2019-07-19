@@ -1,4 +1,4 @@
-import _ from 'lodash/fp'
+// import _ from 'lodash/fp'
 import { cleanString, reducer } from '../src/clean'
 
 /* globals describe test expect */
