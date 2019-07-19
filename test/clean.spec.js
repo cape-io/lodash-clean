@@ -1,4 +1,5 @@
-import { cleanString } from '../src/clean'
+import _ from 'lodash/fp'
+import { cleanString, reducer } from '../src/clean'
 
 /* globals describe test expect */
 
@@ -13,3 +14,8 @@ describe('cleanString', () => {
     expect(cleanString('')).toBe(undefined)
   })
 })
+// describe('reducer', () => {
+//   const transform = reducer(_.noop)
+//   test('', () => {
+//   })
+// })

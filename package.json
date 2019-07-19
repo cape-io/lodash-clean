@@ -8,6 +8,14 @@
   "bugs": {
     "url": "https://github.com/cape-io/lodash-clean/issues"
   },
+  "keywords": [
+    "lodash",
+    "clean",
+    "trim",
+    "compact",
+    "array",
+    "object"
+  ],
   "scripts": {
     "build": "mkdir -p lib && babel ./src -d lib",
     "dev": "",
@@ -16,7 +24,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -27,6 +35,6 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-lodash-fp": "^2.2.0-a1",
-    "jest": "^24.1.0"
+    "jest": "^24.8.0"
   }
 }

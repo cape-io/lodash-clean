@@ -1,6 +1,7 @@
 import { isFunction } from 'lodash/fp'
-
 import { fieldTypeCleaners, buildGetValue, getValue } from './munge'
+
+export * from './clean'
 
 function getMungeFunc(mungeOption) {
   if (isFunction(mungeOption)) return mungeOption(fieldTypeCleaners)

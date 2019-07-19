@@ -53,6 +53,7 @@ You can customize the processing.
 ```javascript
 import { buildCleaner } from 'lodash-clean'
 
+// These are the default options
 const options = {
   isArray: cleanArray,
   isBoolean: _.identity,
