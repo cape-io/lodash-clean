@@ -1,7 +1,7 @@
 # lodash-clean
 
 Remove object properties that are undefined, functions, empty arrays, or empty strings.
-Sometimes the API response is filled with tons properties that are empty strings and you want them gone.
+Sometimes an API response is filled with tons of properties that are empty strings and you just want them gone.
 Think of this as a mild form of `_.compact` for objects. Returns a new object or `undefined`.
 
 ## Install
