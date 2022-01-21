@@ -73,10 +73,11 @@ const after = clean(before)
 
 Object property values can be cleaned up depending on type. If you want to remove null values simply send `{ isNull: _.noop }` and they will be removed. Or if you want to keep function properties `{ isFunction: _.identity }`. Take a look at /src/clean.js for our default handling of strings and arrays. Returning **undefined** will result in the property being **removed**. Returning anything else will set the new value.
 
-If you need more control or want to process additional types pass a function. Tt will be passed the default options object and will need return a function that decides how to cleanup the object. See `buildGetValue()` within /src/munge.js for reference.
+If you need more control or want to process additional types pass a function. It will be passed the default options object and will need return a function that decides how to cleanup the object. See `buildGetValue()` within /src/munge.js for reference.
 
 ## Changes
 
+* **2.2.3** Update dependencies.
 * **2.2.2** Update dependencies.
 * **2.2** Code cleanup.
 * **2.1** Allow keys to have dots. See issue #1.
